@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\Utilities\FileLoader.cs" />
     <Compile Include="ViewModel\Utilities\IsSelected.cs" />
     <Compile Include="ViewModel\Utilities\ModifyDatas.cs" />
+    <Compile Include="ViewModel\Utilities\SaveDataToXml.cs" />
     <Compile Include="ViewModel\Utilities\zoomBorder.cs" />
     <Compile Include="ViewModel\ViewerVM.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

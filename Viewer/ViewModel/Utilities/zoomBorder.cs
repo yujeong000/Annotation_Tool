@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -75,6 +76,21 @@ namespace Viewer.ViewModel.Utilities
             }
         }
 
+        public async void ChangeSelectedDataColor(XmlModel selectedData)
+        {
+            //// Save the original color
+            //var originalColor = selectedData.Color;
+
+            //// Set the color to "Blue" for 3 seconds
+            //selectedData.Color = "Blue";
+
+            //// Wait for 3 seconds using Task.Delay
+            //await Task.Delay(3000);
+
+            //// Restore the original color
+            //selectedData.Color = originalColor;
+        }
+
         public void ChangeFocusToSelectedCentered()
         {
             if (SelectedItemIndex >= ViewXmlReference.Count)
@@ -96,6 +112,8 @@ namespace Viewer.ViewModel.Utilities
 
             tt.X = (-midX) * st.ScaleX + renderCenterX;
             tt.Y = (-midY) * st.ScaleY + renderCenterY;
+
+            ChangeSelectedDataColor(selectedData);
         }
 
         public void Initialize(UIElement element)
@@ -230,6 +248,9 @@ namespace Viewer.ViewModel.Utilities
         {
             if (child != null)
             {
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                    return;
+
                 if (child.IsMouseCaptured)
                 {
                     var tt = GetTranslateTransform(child);

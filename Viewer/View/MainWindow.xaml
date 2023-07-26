@@ -12,7 +12,17 @@
         Title="MainWindow" Height="700" Width="1000">
     <Window.Resources>
         <viewModal:ViewerVM x:Key="vm"/>
+
+        <Style TargetType="DataGridCell">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
+    
     <Grid DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -35,14 +45,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Tool Box" Margin="5,0,0,0"/>
-
                 <utilities:ZoomBorder Grid.Row="1" x:Name="border" ClipToBounds="True" Background="Gray"
                                       ViewXmlReference="{Binding CurrentXmlDatasInCanvas}">
                     <Grid>
                         <Canvas Width="{Binding CurrentImageInCanvas.BackgroundImage.PixelWidth}" 
                             Height="{Binding CurrentImageInCanvas.BackgroundImage.PixelHeight}"
-                            Cursor="Cross">
+                            Cursor="Cross" Name="canvas1">
                             <!-- Canvas 배경으로 이미지 설정 -->
                             <Canvas.Background>
                                 <ImageBrush ImageSource="{Binding CurrentImageInCanvas.BackgroundImage}"/>
@@ -57,7 +65,7 @@
                                         <Setter Property="Canvas.Top" Value="{Binding Ymin}" />
                                         <Setter Property="Canvas.RenderTransform">
                                             <Setter.Value>
-                                                <RotateTransform Angle="0" CenterX="{Binding CenterX}" CenterY="{Binding CenterY}"/>
+                                                <RotateTransform Angle="{Binding Degree}" CenterX="{Binding CenterX}" CenterY="{Binding CenterY}"/>
                                             </Setter.Value>
                                         </Setter>
                                     </Style>
@@ -76,10 +84,13 @@
                             </ItemsControl>
 
                         </Canvas>
+                        <Canvas>
+                            <Rectangle Height="40" Width="50" Stroke="Black" StrokeThickness="6"/>
+                        </Canvas>
                     </Grid>
 
-                </utilities:ZoomBorder>
 
+                </utilities:ZoomBorder>
             </Grid>
 
             <GridSplitter Grid.Column="1" Background="LightGray" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" ShowsPreview="True"/>
@@ -106,7 +117,13 @@
                                         <CheckBox Grid.Column="1"  Margin="6,0,0,0"
                                                   Content="{Binding XmlName}"
                                                   Command="{Binding Source={StaticResource vm}, Path=IsCheckCommand}" 
-                                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                                            <CheckBox.ContextMenu>
+                                                <ContextMenu StaysOpen="True">
+                                                    <MenuItem Header="내보내기" Command="{Binding Source={StaticResource vm}, Path=SaveDataToXmlCommand}" CommandParameter="{Binding}"/>
+                                                </ContextMenu>
+                                            </CheckBox.ContextMenu>
+                                        </CheckBox>
                                         
                                     </Grid>
                                 </DataTemplate>
@@ -130,10 +147,12 @@
                 <GridSplitter Grid.Row="1" Background="LightGray" Height="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" ShowsPreview="True" Margin="5"/>
                 <TabControl Grid.Row="2" >
                     <TabItem Header="{Binding CurrentXmlDatasInDatagrid[0].XmlName}">
-                        <DataGrid 
+                        <DataGrid x:Name="XmlContentsDataGrid" 
                           ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" 
                           ItemsSource="{Binding CurrentXmlDatasInDatagrid, Mode=TwoWay, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
-                          CanUserAddRows="True" CanUserDeleteRows="True" IsReadOnly="False">
+                          CanUserAddRows="True" CanUserDeleteRows="True" IsReadOnly="False" CanUserSortColumns="False"
+                                  SelectedIndex="{Binding ElementName=border, Path=SelectedItemIndex, Mode=TwoWay, NotifyOnTargetUpdated=True}"
+                          TargetUpdated="XmlContentsDataGrid_TargetUpdated">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="CellEditEnding">
                                     <Command:EventToCommand Command="{Binding CellEditEndingCommand}"

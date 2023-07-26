@@ -24,5 +24,12 @@ namespace Viewer
         {
             InitializeComponent();
         }
+        private void XmlContentsDataGrid_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            DataGrid dataGrid = (DataGrid)sender;
+            dataGrid.ScrollIntoView(dataGrid.SelectedItem);
+
+        }
+
     }
 }

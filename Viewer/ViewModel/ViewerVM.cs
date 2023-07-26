@@ -31,6 +31,7 @@ namespace Viewer.ViewModel
         private FileLoader fileLoader = new FileLoader();
         private IsSelected isSelected = new IsSelected();
         private ModifyDatas ModifyDatas = new ModifyDatas();
+        private SaveDataToXml SaveDataToXml = new SaveDataToXml();
 
         // Model
         public FilePathModel FilePathModel { get; private set; }
@@ -71,6 +72,7 @@ namespace Viewer.ViewModel
         public ICommand OpenXmlCommand { get; private set; }
         public ICommand IsCheckCommand { get; private set; }
         public ICommand CellEditEndingCommand { get; private set; }
+        public ICommand SaveDataToXmlCommand { get; private set; }
 
         public ViewerVM()
         {
@@ -90,6 +92,7 @@ namespace Viewer.ViewModel
             OpenXmlCommand = new RelayCommand(OpenXml);
             IsCheckCommand = new RelayCommand(IsCheckedXmlList);
             CellEditEndingCommand = new RelayCommand(OnCellEditEnding);
+            SaveDataToXmlCommand = new RelayCommand(SaveXml);
 
             // Event Handler
             CurrentXmlDatasInDatagrid.CollectionChanged += CurrentXmlDatasInDatagrid_CollectionChanged;
@@ -197,6 +200,13 @@ namespace Viewer.ViewModel
             }
         }
 
+        private void SaveXml(object parameter)
+        {
+            XmlList xmlList = parameter as XmlList;
+            ObservableCollection<XmlModel> temp =  ModifyDatas.Add_FindXmlDataByName(xmlList.XmlName, AllXmlDatas);
+            SaveDataToXml.WriteXml(temp);
+        }
+
         //이미지 열기
         private void OpenImage(object parameter)
         {
@@ -216,7 +226,7 @@ namespace Viewer.ViewModel
 
         //Xml 열기
         private int tempColor = 0;
-        private string[] colorList = { "Red", "RoyalBlue", "Green", "Purple", "Coral", "Navy", "SpringGreen" };
+        private string[] colorList = { "Red", "Green", "Purple", "Coral", "Navy", "SpringGreen" };
 
         private void OpenXml(object parameter)
         {
@@ -248,4 +258,3 @@ namespace Viewer.ViewModel
 
     }
 }
-

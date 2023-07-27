@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Viewer.ViewModel;
 
 namespace Viewer
 {
@@ -29,6 +31,13 @@ namespace Viewer
             DataGrid dataGrid = (DataGrid)sender;
             dataGrid.ScrollIntoView(dataGrid.SelectedItem);
 
+        }
+
+        // 마우스 클릭시 messenger 로 마우스 좌표 날려보냄
+        private void Canvas1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point mousePosition = e.GetPosition(canvas1);
+            Viewer.ViewModel.Messenger.Send("MouseClickMessage", mousePosition);
         }
 
     }

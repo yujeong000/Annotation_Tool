@@ -50,7 +50,10 @@
                     <Grid>
                         <Canvas Width="{Binding CurrentImageInCanvas.BackgroundImage.PixelWidth}" 
                             Height="{Binding CurrentImageInCanvas.BackgroundImage.PixelHeight}"
-                            Cursor="Cross" Name="canvas1">
+                            Cursor="Cross" Name="canvas1"
+                            MouseLeftButtonDown="Canvas1_MouseLeftButtonDown">
+                            <!-- 마우스 클릭에 바인딩 준비 -->
+                            
                             <!-- Canvas 배경으로 이미지 설정 -->
                             <Canvas.Background>
                                 <ImageBrush ImageSource="{Binding CurrentImageInCanvas.BackgroundImage}"/>

@@ -83,6 +83,7 @@
     <Compile Include="Model\XmlList.cs" />
     <Compile Include="Model\XmlModel.cs" />
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModel\Messenger.cs" />
     <Compile Include="ViewModel\Utilities\FileLoader.cs" />
     <Compile Include="ViewModel\Utilities\IsSelected.cs" />
     <Compile Include="ViewModel\Utilities\ModifyDatas.cs" />

@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\Choiwooseok\Desktop\Annotation_Tool\Viewer\obj\Debug\
+C:\Users\Choiwooseok\Desktop\Annotation_Tool\Viewer\obj\Release\
 Viewer
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Choiwooseok\Desktop\Annotation_Tool\Viewer\App.xaml
 1871162140
 
@@ -16,5 +16,5 @@ C:\Users\Choiwooseok\Desktop\Annotation_Tool\Viewer\App.xaml
 122-251155967
 View\MainWindow.xaml;
 
-False
+True
 

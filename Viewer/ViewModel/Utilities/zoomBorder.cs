@@ -230,8 +230,8 @@ namespace Viewer.ViewModel.Utilities
                         {
                             // 박스 안에 포함된 좌표라면 SelectedBox에 저장하고 종료
                             SelectedItemIndex = i;
-                            ViewXmlReference[SelectedItemIndex].RotationAngle += 15;
-                            if (ViewXmlReference[SelectedItemIndex].RotationAngle == 90) ViewXmlReference[SelectedItemIndex].RotationAngle = 0;
+                            ViewXmlReference[SelectedItemIndex].Degree += 15;
+                            if (ViewXmlReference[SelectedItemIndex].Degree == 90) ViewXmlReference[SelectedItemIndex].Degree = 0;
                             break;
                         }
                     }

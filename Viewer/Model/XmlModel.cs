@@ -9,14 +9,7 @@ namespace Viewer.Model
 {
     class XmlModel : INotifyPropertyChanged
     {
-        private double rotationAngle;
-        public double RotationAngle
-        {
-            get { return rotationAngle; }
-            set { rotationAngle = value; OnPropertyChanged(nameof(RotationAngle)); }
-        }
-
-        private string xmlName;
+                private string xmlName;
         public string XmlName
         {
             get { return xmlName; }

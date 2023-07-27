@@ -114,6 +114,7 @@ namespace Viewer.ViewModel.Utilities
             tt.Y = (-midY) * st.ScaleY + renderCenterY;
 
             ChangeSelectedDataColor(selectedData);
+            
         }
 
         public void Initialize(UIElement element)
@@ -229,6 +230,7 @@ namespace Viewer.ViewModel.Utilities
                         {
                             // 박스 안에 포함된 좌표라면 SelectedBox에 저장하고 종료
                             SelectedItemIndex = i;
+                            ViewXmlReference[SelectedItemIndex].RotationAngle += 45;
                             break;
                         }
                     }

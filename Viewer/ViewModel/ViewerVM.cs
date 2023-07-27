@@ -313,6 +313,7 @@ namespace Viewer.ViewModel
             xmlModel.Height = (int)Math.Abs(Y1 - Y2); 
             xmlModel.CenterX = xmlModel.Width/2;
             xmlModel.CenterY = xmlModel.Height/2;
+            
 
             CurrentXmlDatasInCanvas.Add(xmlModel);
             CurrentXmlDatasInDatagrid.Add(xmlModel);

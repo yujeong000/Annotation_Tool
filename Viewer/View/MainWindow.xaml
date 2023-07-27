@@ -22,7 +22,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
+
     <Grid DataContext="{StaticResource vm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -53,7 +53,7 @@
                             Cursor="Cross" Name="canvas1"
                             MouseLeftButtonDown="Canvas1_MouseLeftButtonDown">
                             <!-- 마우스 클릭에 바인딩 준비 -->
-                            
+
                             <!-- Canvas 배경으로 이미지 설정 -->
                             <Canvas.Background>
                                 <ImageBrush ImageSource="{Binding CurrentImageInCanvas.BackgroundImage}"/>
@@ -68,7 +68,8 @@
                                         <Setter Property="Canvas.Top" Value="{Binding Ymin}" />
                                         <Setter Property="Canvas.RenderTransform">
                                             <Setter.Value>
-                                                <RotateTransform Angle="{Binding Degree}" CenterX="{Binding CenterX}" CenterY="{Binding CenterY}"/>
+                                                <!-- Angle 속성과 RotationAngle 속성을 바인딩하여 회전 설정 -->
+                                                <RotateTransform Angle="{Binding RotationAngle}" CenterX="{Binding CenterX}" CenterY="{Binding CenterY}"/>
                                             </Setter.Value>
                                         </Setter>
                                     </Style>
@@ -127,7 +128,7 @@
                                                 </ContextMenu>
                                             </CheckBox.ContextMenu>
                                         </CheckBox>
-                                        
+
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -165,10 +166,10 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn MinWidth="10" Width="Auto" Header="Xmin" Binding="{Binding Xmin, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataGridTextColumn MinWidth="10" Width="Auto" Header="Ymin" Binding="{Binding Ymin, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <DataGridTextColumn MinWidth="10" Width="Auto" Header="Xmax" Binding="{Binding Xmax, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <DataGridTextColumn MinWidth="10" Width="Auto" Header="Ymax" Binding="{Binding Ymax, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <DataGridTextColumn MinWidth="10" Width="Auto" Header="Degree" Binding="{Binding Degree, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <DataGridTextColumn MinWidth="10" Width="Auto" Header="Class" Binding="{Binding _Class, UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn MinWidth="10" Width="Auto" Header="Xmax" Binding="{Binding Xmax, UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn MinWidth="10" Width="Auto" Header="Ymax" Binding="{Binding Ymax, UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn MinWidth="10" Width="Auto" Header="Degree" Binding="{Binding Degree, UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn MinWidth="10" Width="Auto" Header="Class" Binding="{Binding _Class, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
